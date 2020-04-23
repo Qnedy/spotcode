@@ -1,7 +1,7 @@
 import api from './api';
 
-const AlbumService = {
+const AlbumsService = {
   index: () => api.get('/dashboard')
 }
 
-export default AlbumService;
+export default AlbumsService;
