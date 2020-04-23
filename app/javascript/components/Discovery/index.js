@@ -12,31 +12,32 @@ const Discovery = () => {
   const [recentAlbums, setRecentAlbums] = useState([]);
   const [recommendedAlbums, setRecommendedAlbums] = useState([]);
 
+  async function fetchAlbums(){
+    const response = await AlbumsService.index();
+    console.log(response.data);
+    setRecentAlbums(response.data['recent_albums']);
+    setRecommendedAlbums(response.data['recommend_album']);
+  };
+
   useEffect(() => {
     fetchAlbums();
   }, []);
 
-  async function fetchAlbums(){
-    const response = await AlbumsService.index();
-    setRecentAlbums(response.data['recent_albums']);
-    setRecommendedAlbums(response.data['recommended_albums']);
-  };
-
   const recent_albums_components = recentAlbums.map((album, key) => 
     <Columns.Column desktop={{ size: 3 }} mobile={{ size: 6 }} key={key}>
-      <Album artist_name={album.artist_name} title={album.title} cover_url={album.cover_url} id={album.id}/>
+      <Album artist_name={album.artist_name} title={album.title} cover_url={album.cpver_url} id={album.id}/>
     </Columns.Column>
   );
 
   const recommended_albums_components = recommendedAlbums.map((album, key) =>
     <Columns.Column desktop={{ size: 3 }} mobile={{ size: 6 }} key={key}>
-      <Album artist_name={album.artist_name} title={album.title} cover_url={album.cover_url} id={album.id}/>
+      <Album artist_name={album.artist_name} title={album.title} cover_url={album.cpver_url} id={album.id}/>
     </Columns.Column>
   );
 
   return (
     <>
-      {recentAlbums &&
+      {recentAlbums.length > 0 &&
         <div>
           <Heading className='has-text-white' size={4}>
             Tocadas recentemente
@@ -47,7 +48,7 @@ const Discovery = () => {
         </div>
       }
  
-      {recommendedAlbums &&
+      {recommendedAlbums.length > 0 &&
         <DivVSpaced>
             <Heading className='has-text-white' size={4}>
                 Recomendadas
