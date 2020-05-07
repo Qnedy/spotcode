@@ -11,6 +11,7 @@ margin-bottom: 30px;
 const Musics = (props) => {
   const [songs, setSongs] = useState([]);
   const [playing, setPlaying] = useState([]);
+  const [playRandom, setPlayRandom] = useState(false);
   const AudioRef = useRef();
 
   useEffect(() => {
@@ -36,6 +37,29 @@ const Musics = (props) => {
 
  }, [props.songs, playing]);
 
+ const NextSong = () => {
+  if(playRandom) {
+    let index = Math.floor(Math.random() * props.songs.length);
+    setPlaying(props.songs[index]);
+ } else
+    setPlaying([]);
+}
+
+const SwitchRandom = () => {
+  if(playRandom) {
+    setPlayRandom(false);
+    setPlaying([]);
+ } else
+    setPlayRandom(true);
+}
+
+useEffect(() => {
+  if(playRandom)
+    NextSong();
+}, [playRandom]);
+
+
+
  return (
    <Fragment>
     <Columns className='is-mobile is-centered'>
@@ -43,10 +67,12 @@ const Musics = (props) => {
          <PlaySequenceButton
            className='is-medium'
            color='primary'
-           outlined>
-            Tocar aleatoriamente
+           outlined
+           onClick={() => SwitchRandom()}
+          >
+            {playRandom == true ? 'Parar de tocar' : 'Tocar aleatoriamente'}
          </PlaySequenceButton>
-         <audio controls ref={AudioRef}>
+         <audio controls ref={AudioRef} onEnded={() => NextSong()} className="is-hidden" >
            <source src={playing.file_url} />
          </audio>
        </Columns.Column>
