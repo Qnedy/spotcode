@@ -1,11 +1,18 @@
 import React from 'react';
 import NavbarFooter from '../../components/partials/Navbar_footer';
 
+import Albums from '../../components/Albums';
+
+import SectionWrapper from '../../components/partials/Section_wrapper';
+
 const AlbumScreen = () => {
     return(
         <>
-            <div>Album Screen</div>
-            <NavbarFooter />
+            <SectionWrapper>
+                <Albums />
+                <NavbarFooter />
+            </SectionWrapper>
+            
         </>
     )
 }

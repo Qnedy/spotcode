@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Album from '../Album';
+import Album from '../partials/Album';
 import styled from 'styled-components';
 import { Columns, Heading} from 'react-bulma-components';
 import AlbumsService from '../../services/albums';
