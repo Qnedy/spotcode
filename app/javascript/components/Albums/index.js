@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import AlbumServices from '../../services/albums';
 import { useParams } from 'react-router-dom';
 
+import Musics from '../Musics';
+
 const DivVSpaced = styled.div`
  margin-top: 20px;
  margin-bottom: 20px;
@@ -34,6 +36,7 @@ const Albums = () => {
          </DivVSpaced>
        </Columns.Column>
      </Columns>
+     <Musics songs={album.songs || []} />
    </>
 );
 }

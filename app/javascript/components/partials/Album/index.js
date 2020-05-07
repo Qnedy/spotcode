@@ -3,6 +3,7 @@ import { Image, Heading} from 'react-bulma-components';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+
 const DivVSpaced = styled.div`
   margin-top: 10px;
 `;
