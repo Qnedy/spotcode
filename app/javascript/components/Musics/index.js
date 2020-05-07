@@ -2,6 +2,8 @@ import React, { Fragment, useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Heading, Columns, Button } from 'react-bulma-components';
 
+import RecentlyHeardsService from '../../services/recently_heards';
+
 import Music from './Music';
 
 const PlaySequenceButton = styled(Button)`
@@ -20,6 +22,7 @@ const Musics = (props) => {
       AudioRef.current.load();
       if(playing.id) {
         AudioRef.current.play();
+        RecentlyHeardsService.create(playing.album_id);
      }
    }
   }, [playing]);
