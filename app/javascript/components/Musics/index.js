@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Heading, Columns, Button } from 'react-bulma-components';
 
@@ -11,6 +11,17 @@ margin-bottom: 30px;
 const Musics = (props) => {
   const [songs, setSongs] = useState([]);
   const [playing, setPlaying] = useState([]);
+  const AudioRef = useRef();
+
+  useEffect(() => {
+    if (AudioRef.current !== null) {
+      AudioRef.current.pause();
+      AudioRef.current.load();
+      if(playing.id) {
+        AudioRef.current.play();
+     }
+   }
+  }, [playing]);
 
   useEffect(() => {
     setSongs(props.songs.map((song, key) =>
@@ -35,6 +46,9 @@ const Musics = (props) => {
            outlined>
             Tocar aleatoriamente
          </PlaySequenceButton>
+         <audio controls ref={AudioRef}>
+           <source src={playing.file_url} />
+         </audio>
        </Columns.Column>
      </Columns>
      {songs}
