@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import NavbarFooter from '../../components/partials/Navbar_footer';
+import SectionWrapper from '../../components/partials/Section_wrapper';
+import { Heading } from 'react-bulma-components';
+import Favorites from '../../components/Favorites';
 
 const FavoritesScreen = () => {
     return(
-        <>
-            <div>Favorites Screen</div>
-            <NavbarFooter />
-        </>
+        <Fragment>
+            <SectionWrapper>
+                <Heading className='has-text-centered has-text-white'>Favoritos</Heading>
+                <Favorites/>
+            </SectionWrapper>
+            <NavbarFooter/>
+        </Fragment>
     )
 }
 
